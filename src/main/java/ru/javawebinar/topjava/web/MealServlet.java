@@ -39,10 +39,8 @@ public class MealServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         request.setAttribute("meals", mealWithExceedList);
-        LOG.debug("meals size " + mealWithExceedList.get(4).toString());
-        LOG.debug("meals size " + mealsList.get(4).toString());
 
         request.getRequestDispatcher("/meals.jsp").forward(request, response);
-        LOG.debug("meals SUCCESSFULLY added to meals.jsp");
+        LOG.debug("meals is SUCCESSFULLY added to meals.jsp");
     }
 }
