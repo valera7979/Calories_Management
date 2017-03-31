@@ -12,21 +12,48 @@
     <title>Add new user</title>
 </head>
 <body>
-
+<div class="col-sm-6">
+    <h2>Add new meal</h2>
+    <%--<jsp:useBean id="meal" scope="request" type="ru.javawebinar.topjava.model.Meal"/>--%>
 <form method="POST" action='meals' name="frmAddMeal">
-
-    id : <input type="text"  name="id" readonly="readonly"
-                value="<c:out value="${meal.id}" />" /> <br />
-
-    Calories : <input type="text"  name="calories"
+    <div class="form-group">
+        <label class="control-label col-sm-2">Product Id</label>
+        <div class="col-sm-10">
+    <input type="text"  name="id" readonly="readonly" class="form-control"
+                value="<c:out value="${meal.id}" />" /> <br/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2">Calories :</label>
+        <div class="col-sm-10">
+     <input type="number" min="0"  name="calories" class="form-control"
                      value="<c:out value="${meal.calories}" />" /> <br />
-    Date :
-    <input type="datetime-local" name="dateTime" value="<c:out value="${meal.dateTime}"/>" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2">Date :</label>
+        <div class="col-sm-10">
 
-    Description :
-    <input type="text" name="description" value="<c:out value="${meal.description}" />" /> <br />
-     <input
-        type="submit" value="Submit" />
+        <input type="datetime-local" name="dateTime" class="form-control"
+           value="${meal.dateTime}"/>
+        </div>
+    </div>
+<br>
+<br>
+    <div class="form-group">
+        <label class="control-label col-sm-2">Description:</label>
+        <div class="col-sm-10">
+
+    <input type="text" name="description" class="form-control"
+           value="<c:out value="${meal.description}" />" /> <br />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-lg-offset-2 col-lg-10">
+     <input type="submit" value="Submit" class="btn btn-primary"/>
+        </div>
+    </div>
 </form>
+</div>
 </body>
 </html>

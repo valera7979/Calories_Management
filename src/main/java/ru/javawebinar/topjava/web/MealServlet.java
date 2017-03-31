@@ -40,25 +40,15 @@ public class MealServlet extends HttpServlet {
         Meal meal = new Meal();
         request.setCharacterEncoding("UTF-8");
         String id = request.getParameter("id");
-        if (!(id == null || id.equals("")))
-            meal.setId(Integer.parseInt(id));
+        if (!id.equals("")) meal.setId(Integer.parseInt(id));
         meal.setCalories(Integer.parseInt(request.getParameter("calories")));
         meal.setDescription(request.getParameter("description"));
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d HH:mm");
-        meal.setDateTime(LocalDateTime.parse(request.getParameter("dateTime")
-                .replace('T', ' '), formatter));
+        meal.setDateTime(LocalDateTime.parse(request.getParameter("dateTime")));
 
         mealDAO.addMeal(meal);
-        request.setAttribute("meals", mealDAO.getMealsWithExceed(MAX_CALORIES_IN_DAY));
 
-        response.setContentType("text/html;charset=UTF-8");
-
-        PrintWriter out = response.getWriter();
-
-
-        request.getRequestDispatcher("/meals.jsp").forward(request, response);
-    }
+        response.sendRedirect("meals");
+     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");

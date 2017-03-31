@@ -1,6 +1,8 @@
+<%@ page import="ru.javawebinar.topjava.util.TimeUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <title>Meal list</title>
@@ -30,9 +32,15 @@
 
     </tr>
     <c:forEach var="meal" items="${meals}">
-        <tr class=<c:out value="${meal.exceed?'exceeded':'normal'}"/>>
+        <jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.model.MealWithExceed"/>
+        <tr class="${meal.exceed?'exceeded':'normal'}"/>
             <td>${meal.description}</td>
-            <td>${fn:replace(meal.dateTime, 'T', ' ')}</td>
+          <%--  <td>${fn:replace(meal.dateTime, 'T', ' ')}</td> --%>
+        <%--=TimeUtil.toString(meal.getDateTime())--%>
+        <td>
+        <fmt:parseDate value="${meal.dateTime}" pattern="y-M-dd'T'H:m" var = "parseDate"/>
+        <fmt:formatDate value="${parseDate}" pattern="yyyy.MM.dd HH:mm" />
+        </td>
             <td>${meal.calories}</td>
             <td><a class = "btn btn-primary" href="<c:url value="?action=edit&id=${meal.id}"/>">Edit</a></td>
 
