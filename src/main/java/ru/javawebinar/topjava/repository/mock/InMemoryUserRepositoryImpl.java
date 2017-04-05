@@ -28,10 +28,6 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
         UsersUtil.USERS.forEach(this::save);
     }
 
-    public static void main(String[] args) {
-        InMemoryUserRepositoryImpl u = new InMemoryUserRepositoryImpl();
-        u.getAll().forEach(System.out::println);
-    }
 
     @Override
     public User save(User user) {

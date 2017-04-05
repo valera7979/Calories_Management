@@ -29,11 +29,17 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
         if (meal.isNew()) {
             meal.setId(counter.incrementAndGet());
             meal.setUserId(userId);
+            repository.put(meal.getId(), meal);
+            LOG.info("save NEW " + meal);
+            return meal;
+        } else if (repository.get(meal.getId()).getUserId() == userId) {
+            repository.put(meal.getId(), meal);
+            LOG.info("updated " + meal);
+            return meal;
+        } else {
+            LOG.info("user " + userId + " attempted edit " + repository.get(meal.getId()));
+            return null;
         }
-        repository.put(meal.getId(), meal);
-        LOG.info("save " + meal);
-        return meal;
-
     }
 
     @Override
@@ -43,7 +49,7 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
             LOG.info("delete meal with id " + id);
             return true;
         } else {
-            LOG.info("delete meal " + id + " was WRONG");
+            LOG.info("delete meal " + repository.get(id) + " by user " + userId + " was WRONG");
             return false;
         }
     }
