@@ -18,7 +18,9 @@ import java.util.Collection;
 import static ru.javawebinar.topjava.UserTestData.ADMIN;
 import static ru.javawebinar.topjava.UserTestData.USER;
 
-@ContextConfiguration({"classpath:/spring/spring-app.xml", "/spring/spring-db.xml"})
+// memo:  т.к. в одной и той же папке 2 имплементации репозитория, то нужно для второй
+//          заводить отдельный spring-mock-repo.xml который указать в контексте
+@ContextConfiguration({"classpath:/spring/spring-mock-repo.xml"})
 @RunWith(SpringRunner.class)
 public class InMemoryAdminRestControllerSpringTest {
 

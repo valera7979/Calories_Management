@@ -1,28 +1,19 @@
-# Calories_Management
+##Задание HW03
 
-Java Enterprise проект с регистрацией/авторизацией и интерфейсом на основе ролей (USER, ADMIN). Администратор может создавать/редактировать/удалять/пользователей, а пользователь - управлять своим профилем и данными (день, еда, калории) через UI (по AJAX) и по REST интерфейсу с базовой авторизацией. Возможна фильтрация данных по датам и времени, при этом цвет записи таблицы еды зависит от того, превышает ли сумма калорий за день норму (редактируемый параметр в профиле пользователя). Весь REST интерфейс покрывается JUnit тестами, используя Spring MVC Test и Spring Security Test.
+- 1 Понять, почему перестали работать SpringMain, InMemoryAdminRestControllerTest, InMemoryAdminRestControllerSpringTest
+- 2 Дополнить скрипты создания и инициализации базы таблицой MEALS. Запустить скрипты на вашу базу (через Run). Порядок таблиц при DROP и DELETE важен, если они связаны fk. Проверьте, что ваши скрипты работают
+- 3 Реализовать через Spring JDBC Template JdbcMealRepositoryImpl
+- - 3.1. сделать каждый метод за один SQL запрос
+- - 3.2. userId в класс Meal вставлять НЕ надо (для UI и REST это лишние данные, userId это id залогиненного пользователя)
+- - 3.3. JbdcTemplate работает через сеттеры. Вместе с конструктором по умолчанию их нужно добавить в Meal
+- - 3.4. Cписок еды должен быть отсортирован (тогда мы его сможем сравнивать с тестовыми данными). Кроме того это требуется для UI и API: последняя еда наверху.
+- 4 Проверить работу MealServlet, запустив приложение
 
-используемые инструменты/ библиотеки/ фреймворки:
-                <a href="http://maven.apache.org/">Maven</a>,
-                <a href="http://projects.spring.io/spring-security/">Spring Security</a>,
-            <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html">Spring MVC</a>,
-                <a href="http://projects.spring.io/spring-data-jpa/">Spring Data JPA</a>,
-                <a href="http://spring.io/blog/2014/05/07/preview-spring-security-test-method-security">Spring Security
-                    Test</a>,
-                <a href="http://hibernate.org/orm/">Hibernate ORM</a>,
-                <a href="http://hibernate.org/validator/">Hibernate Validator</a>,
-                <a href="http://www.slf4j.org/">SLF4J</a>,
-                <a href="https://github.com/FasterXML/jackson">Json Jackson</a>,
-                <a href="http://ru.wikipedia.org/wiki/JSP">JSP</a>,
-                <a href="http://en.wikipedia.org/wiki/JavaServer_Pages_Standard_Tag_Library">JSTL</a>,
-                <a href="http://tomcat.apache.org/">Apache Tomcat</a>,
-                <a href="http://www.webjars.org/">WebJars</a>,
-                <a href="http://ehcache.org">Ehcache</a>,
-                <a href="http://www.postgresql.org/">PostgreSQL</a>,
-                <a href="http://junit.org/">JUnit</a>,
-                <a href="http://hamcrest.org/JavaHamcrest/">Hamcrest</a>,
-                <a href="http://jquery.com/">jQuery</a>,
-                <a href="https://datatables.net/">jQuery Datatable</a>,
-                <a href="http://ned.im/noty/">jQuery notification</a>,
-                <a href="http://getbootstrap.com/">Bootstrap</a>.
+###Optional
 
+- 5 Сделать MealServiceTest из MealService (Ctrl+Shift+T и выбрать JUnit4) и реализовать тесты.
+- - 5.1 Сделать тестовые данные MealTestData, АНАЛОГИЧНЫЕ пропопулированным в populateDB.sql. Сравниваем данные через MealTestData.MATCHER
+- - 5.2 Сделать тесты на чужую еду (delete, get, update) с тем чтобы получить NotFoundException.
+* 6 Предложить решение, как почнинить SpringMain, InMemory*Test. InMemory*Test должны использовать реализацию в памяти
+- 7 Сделать индексы к таблице Meals. Индекс на pk (id) postgres создает автоматически: Postgres and Indexes on Foreign Keys and Primary Keys
+Postgres Guide: Indexes

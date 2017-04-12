@@ -21,7 +21,7 @@ public class InMemoryAdminRestControllerTest {
 
     @BeforeClass
     public static void beforeClass() {
-        appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml");
+        appCtx = new ClassPathXmlApplicationContext("spring/spring-mock-repo.xml");
         System.out.println("\n" + Arrays.toString(appCtx.getBeanDefinitionNames()) + "\n");
         controller = appCtx.getBean(AdminRestController.class);
     }
@@ -31,7 +31,7 @@ public class InMemoryAdminRestControllerTest {
         appCtx.close();
     }
 
-   @Before
+    @Before
     public void setUp() throws Exception {
         // Re-initialize
         UserRepository repository = appCtx.getBean(UserRepository.class);
