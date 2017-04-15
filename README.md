@@ -1,3 +1,7 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7e11826fd02f43f1b6e92450370ef89d)](https://www.codacy.com/app/valera7979/Calories_Management?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=valera7979/Calories_Management&amp;utm_campaign=Badge_Grade)
+[![Dependency Status](https://dependencyci.com/github/valera7979/Calories_Management/badge)](https://dependencyci.com/github/valera7979/Calories_Management)
+[![Build Status](https://travis-ci.org/valera7979/Calories_Management.svg?branch=master)](https://travis-ci.org/valera7979/Calories_Management)
+
 # Calories_Management
 
 Java Enterprise проект с регистрацией/авторизацией и интерфейсом на основе ролей (USER, ADMIN). Администратор может создавать/редактировать/удалять/пользователей, а пользователь - управлять своим профилем и данными (день, еда, калории) через UI (по AJAX) и по REST интерфейсу с базовой авторизацией. Возможна фильтрация данных по датам и времени, при этом цвет записи таблицы еды зависит от того, превышает ли сумма калорий за день норму (редактируемый параметр в профиле пользователя). Весь REST интерфейс покрывается JUnit тестами, используя Spring MVC Test и Spring Security Test.
