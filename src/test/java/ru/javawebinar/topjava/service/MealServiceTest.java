@@ -1,7 +1,13 @@
 package ru.javawebinar.topjava.service;
 
-import org.junit.Test;
+import org.junit.*;
+import org.junit.rules.ExpectedException;
+import org.junit.rules.ExternalResource;
+import org.junit.rules.Stopwatch;
+import org.junit.runner.Description;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -26,13 +32,52 @@ import static ru.javawebinar.topjava.UserTestData.USER_ID;
 @RunWith(SpringJUnit4ClassRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 public class MealServiceTest {
+    private static final Logger LOG = LoggerFactory.getLogger(MealServiceTest.class);
 
     static {
         SLF4JBridgeHandler.install();
     }
 
+    private static String info;
+
     @Autowired
     private MealService service;
+
+    @ClassRule
+    public static final ExternalResource resource = new ExternalResource() {
+        @Override
+        protected void after() {
+            LOG.info(info);
+        }
+    };
+
+
+    @Rule
+    public Stopwatch stopwatch = new Stopwatch() {
+        @Override
+        protected void succeeded(long nanos, Description description) {
+            LOG.info(description + "succeeded " + nanos);
+            info += description + "succeeded " + nanos / 1_000_000 + " ms \n";
+        }
+
+        @Override
+        protected void failed(long nanos, Throwable e, Description description) {
+            LOG.info("{} failed {} ns", description, nanos);
+            info += description + "failed " + nanos / 1_000_000 + " ms \n";
+        }
+
+        @Override
+        protected void skipped(long nanos, AssumptionViolatedException e, Description description) {
+            LOG.info("{} skipped {} ns", description, nanos);
+            info += description + "skipped " + nanos / 1_000_000 + " ms \n";
+        }
+
+        @Override
+        protected void finished(long nanos, Description description) {
+            LOG.info("{} finished {} ns", description, nanos);
+
+        }
+    };
 
     @Test
     public void testDelete() throws Exception {
@@ -40,8 +85,12 @@ public class MealServiceTest {
         MATCHER.assertCollectionEquals(Arrays.asList(MEAL6, MEAL5, MEAL4, MEAL3, MEAL2), service.getAll(USER_ID));
     }
 
-    @Test(expected = NotFoundException.class)
+    @Rule
+    public final ExpectedException exception = ExpectedException.none();
+
+    @Test
     public void testDeleteNotFound() throws Exception {
+        exception.expect(NotFoundException.class);
         service.delete(MEAL1_ID, 1);
     }
 
@@ -58,8 +107,9 @@ public class MealServiceTest {
         MATCHER.assertEquals(ADMIN_MEAL1, actual);
     }
 
-    @Test(expected = NotFoundException.class)
+    @Test(expected = javax.persistence.NoResultException.class)
     public void testGetNotFound() throws Exception {
+        // exception.expect(NotFoundException.class);
         service.get(MEAL1_ID, ADMIN_ID);
     }
 
@@ -70,8 +120,9 @@ public class MealServiceTest {
         MATCHER.assertEquals(updated, service.get(MEAL1_ID, USER_ID));
     }
 
-    @Test(expected = NotFoundException.class)
+    @Test
     public void testUpdateNotFound() throws Exception {
+        exception.expect(NotFoundException.class);
         service.update(MEAL1, ADMIN_ID);
     }
 
@@ -85,4 +136,6 @@ public class MealServiceTest {
         MATCHER.assertCollectionEquals(Arrays.asList(MEAL3, MEAL2, MEAL1),
                 service.getBetweenDates(LocalDate.of(2015, Month.MAY, 30), LocalDate.of(2015, Month.MAY, 30), USER_ID));
     }
+
+
 }
