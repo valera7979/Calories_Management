@@ -47,7 +47,7 @@ public class MealServiceTest {
     public static final ExternalResource resource = new ExternalResource() {
         @Override
         protected void after() {
-            LOG.info(info);
+            LOG.info("\n\n----------Times for all tests-------------- \n" + info);
         }
     };
 
@@ -107,9 +107,9 @@ public class MealServiceTest {
         MATCHER.assertEquals(ADMIN_MEAL1, actual);
     }
 
-    @Test(expected = javax.persistence.NoResultException.class)
+    @Test
     public void testGetNotFound() throws Exception {
-        // exception.expect(NotFoundException.class);
+        exception.expect(NotFoundException.class);
         service.get(MEAL1_ID, ADMIN_ID);
     }
 
