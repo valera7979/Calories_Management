@@ -23,15 +23,10 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
     @Autowired
     protected UserService service;
 
-    @Autowired
-    protected JpaUtil jpaUtil;
-
-
-   @Before
+    @Before
     public void setUp() throws Exception {
-      // Assume.assumeTrue(false);
-       service.evictCache();
-        jpaUtil.clear2ndLevelHibernateCache();
+        Assume.assumeTrue(true);
+        service.evictCache();
     }
 
     @Test
