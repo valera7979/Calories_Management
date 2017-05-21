@@ -34,7 +34,7 @@
                     </thead>
                     <c:forEach items="${users}" var="user">
                         <jsp:useBean id="user" scope="page" type="ru.javawebinar.topjava.model.User"/>
-                        <tr>
+                        <tr id="${user.id}">
                             <td><c:out value="${user.name}"/></td>
                             <td><a href="mailto:${user.email}">${user.email}</a></td>
                             <td>${user.roles}</td>
@@ -46,7 +46,7 @@
                             <td><a class="btn btn-xs btn-primary">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </a></td>
-                            <td><a class="btn btn-xs btn-danger delete" id="${user.id}">
+                            <td><a class="btn btn-xs btn-danger delete">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             </a></td>
                         </tr>
@@ -73,7 +73,8 @@
                         <label for="name" class="control-label col-xs-3"><spring:message code="users.name"/></label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="<spring:message code="users.name"/>">
+                            <input type="text" class="form-control" id="name" name="name"
+                                   placeholder="<spring:message code="users.name"/>">
                         </div>
                     </div>
 
@@ -81,15 +82,18 @@
                         <label for="email" class="control-label col-xs-3"><spring:message code="users.email"/></label>
 
                         <div class="col-xs-9">
-                            <input type="email" class="form-control" id="email" name="email" placeholder="<spring:message code="users.email"/>">
+                            <input type="email" class="form-control" id="email" name="email"
+                                   placeholder="<spring:message code="users.email"/>">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="password" class="control-label col-xs-3"><spring:message code="users.password"/></label>
+                        <label for="password" class="control-label col-xs-3"><spring:message
+                                code="users.password"/></label>
 
                         <div class="col-xs-9">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="<spring:message code="users.password"/>">
+                            <input type="password" class="form-control" id="password" name="password"
+                                   placeholder="<spring:message code="users.password"/>">
                         </div>
                     </div>
 
