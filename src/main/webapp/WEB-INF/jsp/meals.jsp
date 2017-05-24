@@ -43,8 +43,12 @@
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="submit" class="btn btn-default"><spring:message
                                         code="meals.filter"/></button>
+                                <button type="reset" class="btn btn-danger" onclick="clearFilter()"><span
+                                        class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+
                             </div>
                         </div>
+
                     </form>
                 </div>
 
@@ -53,10 +57,6 @@
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </a>
                 </div>
-
-                <hr>
-                <a href="meals/create"><spring:message code="meals.add"/></a>
-                <hr>
 
                 <table class="table table-hover" id="datatable">
                     <thead>

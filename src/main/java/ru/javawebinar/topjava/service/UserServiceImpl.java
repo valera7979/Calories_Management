@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
@@ -17,7 +18,7 @@ import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository repository;
+    private UserRepository repository;
 
     @Autowired
     public UserServiceImpl(UserRepository repository) {
@@ -70,5 +71,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getWithMeals(int id) {
         return checkNotFoundWithId(repository.getWithMeals(id), id);
+    }
+
+    @Override
+    @Transactional
+    public void changeEnabled(int id) {
+        User user = repository.get(id);
+        user.setEnabled(!user.isEnabled());
+        update(user);
     }
 }

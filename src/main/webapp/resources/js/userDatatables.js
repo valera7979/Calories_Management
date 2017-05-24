@@ -40,3 +40,15 @@ $(function () {
     });
     makeEditable();
 });
+
+function changeCheckbox(id) {
+    var url = ajaxUrl + "checkbox/" + id;
+    $.ajax({
+        url: url,
+        type: 'POST',
+        success: function () {
+            updateTable();
+            successNoty('Activity changed');
+        }
+    })
+}

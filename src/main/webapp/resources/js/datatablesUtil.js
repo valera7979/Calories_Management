@@ -3,6 +3,10 @@ function makeEditable() {
         deleteRow($(this).closest("tr").attr("id"));
     });
 
+    $('.checkbox').change(function () {
+        changeCheckbox($(this).closest("tr").attr("id"));
+    });
+
     $('#detailsForm').submit(function () {
         save();
         return false;
@@ -39,11 +43,12 @@ function updateTable() {
         datatableApi.clear();
         $.each(data, function (key, item) {
             datatableApi.row.add(item);
-            //  successNoty('drawed ' + item.valueOf());
+            successNoty('drawed ' + item.valueOf());
         });
         datatableApi.draw();
     });
 }
+
 
 function save() {
     var form = $('#detailsForm');
@@ -53,26 +58,13 @@ function save() {
         data: form.serialize(),
         success: function () {
             $('#editRow').modal('hide');
-            filter();
+            if (ajaxUrl.includes("meals")) {
+                filter();
+
+            }
+            else
+                updateTable();
             successNoty('Saved');
-        }
-    });
-}
-
-function filter() {
-    var form = $('#filterForm');
-    debugger;
-    $.ajax({
-        type: "POST",
-        url: ajaxUrl + 'filter',
-        data: form.serialize(),
-        success: function (data) {
-            datatableApi.clear();
-            $.each(data, function (key, item) {
-                datatableApi.row.add(item);
-            });
-            datatableApi.draw();
-
         }
     });
 }

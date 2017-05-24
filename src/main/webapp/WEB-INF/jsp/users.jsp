@@ -5,6 +5,11 @@
 
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
+
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires" content="Sat, 01 Dec 2012 00:00:00 GMT">
+
 <body>
 <script type="text/javascript" src="resources/js/datatablesUtil.js" defer></script>
 <script type="text/javascript" src="resources/js/userDatatables.js" defer></script>
@@ -34,13 +39,13 @@
                     </thead>
                     <c:forEach items="${users}" var="user">
                         <jsp:useBean id="user" scope="page" type="ru.javawebinar.topjava.model.User"/>
-                        <tr id="${user.id}">
+                        <tr class="${user.enabled ? 'enabled' : 'disabled'}" id="${user.id}">
                             <td><c:out value="${user.name}"/></td>
                             <td><a href="mailto:${user.email}">${user.email}</a></td>
                             <td>${user.roles}</td>
                             <td>
-                                <input type="checkbox"
-                                       <c:if test="${user.enabled}">checked</c:if> id="${user.id}"/>
+                                <input type="checkbox" class="checkbox"
+                                       <c:if test="${user.enabled}">checked</c:if>/>
                             </td>
                             <td><fmt:formatDate value="${user.registered}" pattern="dd-MMMM-yyyy"/></td>
                             <td><a class="btn btn-xs btn-primary">

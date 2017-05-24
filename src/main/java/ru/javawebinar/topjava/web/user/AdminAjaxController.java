@@ -43,4 +43,13 @@ public class AdminAjaxController extends AbstractUserController {
             super.update(user, id);
         }
     }
+
+    @PostMapping("/checkbox/{id}")
+    public void changeCheckBox(@PathVariable("id") Integer id) {
+        /*User user = super.get(id);
+        user.setEnabled(!user.isEnabled());
+        super.update(user, id);*/
+        super.changeEnabled(id);
+    }
+
 }
