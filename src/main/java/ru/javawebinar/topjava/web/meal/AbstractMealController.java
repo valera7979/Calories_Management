@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ru.javawebinar.topjava.AuthorizedUser;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.service.MealService;
+import ru.javawebinar.topjava.to.MealTo;
 import ru.javawebinar.topjava.to.MealWithExceed;
 import ru.javawebinar.topjava.util.DateTimeUtil;
-import ru.javawebinar.topjava.util.MealsUtil;
+import ru.javawebinar.topjava.util.MealUtil;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -38,7 +39,7 @@ public abstract class AbstractMealController {
     public List<MealWithExceed> getAll() {
         int userId = AuthorizedUser.id();
         LOG.info("getAll for User {}", userId);
-        return MealsUtil.getWithExceeded(service.getAll(userId), AuthorizedUser.getCaloriesPerDay());
+        return MealUtil.getWithExceeded(service.getAll(userId), AuthorizedUser.getCaloriesPerDay());
     }
 
     public Meal create(Meal meal) {
@@ -65,7 +66,7 @@ public abstract class AbstractMealController {
         int userId = AuthorizedUser.id();
         LOG.info("getBetween dates({} - {}) time({} - {}) for User {}", startDate, endDate, startTime, endTime, userId);
 
-        return MealsUtil.getFilteredWithExceeded(
+        return MealUtil.getFilteredWithExceeded(
                 service.getBetweenDates(
                         startDate != null ? startDate : DateTimeUtil.MIN_DATE,
                         endDate != null ? endDate : DateTimeUtil.MAX_DATE, userId),
@@ -73,5 +74,11 @@ public abstract class AbstractMealController {
                 endTime != null ? endTime : LocalTime.MAX,
                 AuthorizedUser.getCaloriesPerDay()
         );
+    }
+
+    public void update(MealTo mealTo) {
+        int userId = AuthorizedUser.id();
+        LOG.info("update " + mealTo);
+        service.update(mealTo, userId);
     }
 }
