@@ -7,6 +7,18 @@
 <body>
 <script type="text/javascript" src="resources/js/datatablesUtil.js" defer></script>
 <script type="text/javascript" src="resources/js/mealDatatables.js" defer></script>
+<script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="https://github.com/xdan/datetimepicker/blob/master/build/jquery.datetimepicker.full.js"></script>
+<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+<link rel="stylesheet" href="https://github.com/xdan/datetimepicker/blob/master/jquery.datetimepicker.css" />
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="jquery.datetimepicker.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <jsp:include page="fragments/bodyHeader.jsp"/>
 
 <div class="jumbotron">
@@ -87,7 +99,7 @@
                             </td>
                             <td>${meal.description}</td>
                             <td>${meal.calories}</td>
-                            <td><a>
+                            <td><a onclick=updateRow(${user.id})>
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </a></td>
                             <td><a onclick="deleteRow(${meal.id})">
@@ -118,9 +130,15 @@
                                 code="meals.dateTime"/></label>
 
                         <div class="col-xs-9">
-                            <input type="datetime-local" class="form-control" id="dateTime" name="dateTime"
+                        <input type="datetime-local" class="form-control" id="dateTime" name="dateTime"
+                               placeholder="<spring:message code="meals.dateTime"/>">
+                    </div>
+
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" id="datetimepicker" name="dateTime"
                                    placeholder="<spring:message code="meals.dateTime"/>">
                         </div>
+
                     </div>
                     <div class="form-group">
                         <label for="description" class="control-label col-xs-3"><spring:message
@@ -151,6 +169,11 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+
+    $('#datetimepicker').datetimepicker();
+
+</script>
 </body>
 <script type="text/javascript">
     var i18n = [];
