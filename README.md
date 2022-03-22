@@ -4,7 +4,12 @@
 
 # <a href="http://mealmng.herokuapp.com/login">Calories_Management*</a>
 
+Java Enterprise project with registration / authorization and role based interface (USER, ADMIN). The administrator can create / edit / delete / users, and the user can manage his profile and data (day, food, calories) through the UI (via AJAX) and through the REST interface with established authorization. It is possible to filter data by date and time, while the color of the food table entry depends on whether the amount of calories per day is large (an editable parameter in the user profile). All REST is covered by JUnit tests using Spring MVC Test and Spring Security Test.
+https://mealmng.herokuapp.com/login - to start application wait 1 min while it starts and rerun if required (due to free plan on herokuapp.com inactive apps are in sleep condition)
+
 Java Enterprise проект с регистрацией/авторизацией и интерфейсом на основе ролей (USER, ADMIN). Администратор может создавать/редактировать/удалять/пользователей, а пользователь - управлять своим профилем и данными (день, еда, калории) через UI (по AJAX) и по REST интерфейсу с базовой авторизацией. Возможна фильтрация данных по датам и времени, при этом цвет записи таблицы еды зависит от того, превышает ли сумма калорий за день норму (редактируемый параметр в профиле пользователя). Весь REST интерфейс покрывается JUnit тестами, используя Spring MVC Test и Spring Security Test.
+
+used tools/ libraries/ frameworks:
 
 используемые инструменты/ библиотеки/ фреймворки:
                 <a href="http://maven.apache.org/">Maven</a>,
