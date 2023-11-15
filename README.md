@@ -1,4 +1,4 @@
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7e11826fd02f43f1b6e92450370ef89d)](https://www.codacy.com/app/valera7979/Calories_Management?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=valera7979/Calories_Management&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7e11826fd02f43f1b6e92450370ef89d)](https://www.codacy.com/app/valera7979/Calories_Management?utm_source=github.com&utm_medium=referral&utm_content=valera7979/Calories_Management&utm_campaign=badger)
 [![Dependency Status](https://dependencyci.com/github/valera7979/Calories_Management/badge)](https://dependencyci.com/github/valera7979/Calories_Management)
 [![Build Status](https://travis-ci.org/valera7979/Calories_Management.svg?branch=master)](https://travis-ci.org/valera7979/Calories_Management)
 
